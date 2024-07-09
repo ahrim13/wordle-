@@ -1,0 +1,29 @@
+footer {
+  margin-top: 15px;
+}
+
+.keyboard-row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5px;
+}
+
+.keyboard-column {
+  background-color: #e2e6ea;
+  border: 0;
+  border-radius: 5px;
+  margin: 3px;
+  padding: 15px 13px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bolder;
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.keyboard-column.large {
+  padding: 15px 20px;
+}
