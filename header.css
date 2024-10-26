@@ -21,6 +21,7 @@ header {
   display: flex;
   align-items: center;
   width: 25px;
+  cursor: pointer;
 }
 
 .info-bar-icons {

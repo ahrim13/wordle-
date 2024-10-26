@@ -9,7 +9,7 @@ function appStart() {
     const div = document.createElement("div");
     div.innerText = "게임이 종료되었습니다.";
     div.style =
-      "display:flex; justify-content:center; align-items:center; position:absolute; top:40vh; left:38vw; background-color:white; width 200px; height 100px;";
+      "display:flex; justify-content:center; align-items:center; position:absolute; top:40vh; left:38vw; background-color:white; width:200px; height:100px;";
     document.body.appendChild(div);
   };
 
@@ -59,22 +59,32 @@ function appStart() {
   const handleKeydown = (event) => {
     const key = event.key.toUpperCase();
     const keyCode = event.keyCode;
+    handleKeyInput(key, keyCode);
+  };
+
+  const handleKeyInput = (key, keyCode) => {
     const thisBlock = document.querySelector(
       `.board-block[data-index='${attempts}${index}']`
     );
 
-    if (event.key === "Backspace") handleBackspace();
+    if (key === "BACKSPACE") handleBackspace();
     else if (index === 5) {
-      if (event.key === "Enter") {
+      if (key === "ENTER") {
         handleEnterKey();
       } else return;
-    } else if (event.key === "Enter") handleEnterKey();
+    } else if (key === "ENTER") handleEnterKey();
     else if (65 <= keyCode && keyCode <= 90) {
       if (thisBlock) {
         thisBlock.innerText = key;
         index += 1;
       }
     }
+  };
+
+  const handleVirtualKeyClick = (event) => {
+    const key = event.target.dataset.key;
+    if (!key) return;
+    handleKeyInput(key, key.charCodeAt(0));
   };
 
   const startTimer = () => {
@@ -93,9 +103,13 @@ function appStart() {
     timer = setInterval(setTime, 1000);
   };
 
-  startTimer();
-
   window.addEventListener("keydown", handleKeydown);
+
+  document.querySelectorAll(".keyboard-column").forEach((key) => {
+    key.addEventListener("click", handleVirtualKeyClick);
+  });
+
+  startTimer();
 }
 
 appStart();
